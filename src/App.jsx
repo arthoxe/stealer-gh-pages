@@ -9,13 +9,14 @@ function App() {
 
   const handleLogin = async () => {
     try {
-      // Remplacez par votre URL Vercel
-      const response = await axios.get(`https://votre-api.vercel.app/api/links?key=${privateKey}`);
+      // Utilisez l'URL complète de votre API déployée sur Vercel
+      const response = await axios.get(`https://stealer-gh-pages-gdjg3zivg-arthoxes-projects.vercel.app/api/links?key=${privateKey}`);
       setLinks(response.data.links);
       setIsLoggedIn(true);
       setError('');
     } catch (e) {
-      setError('Clé privée invalide');
+      console.error("Erreur:", e);
+      setError('Clé privée invalide ou erreur de connexion');
     }
   };
 
@@ -37,11 +38,15 @@ function App() {
         <div className="dashboard">
           <h1>Liens GoFile pour {privateKey}</h1>
           <ul>
-            {links.map((link, index) => (
-              <li key={index}>
-                <a href={link} target="_blank" rel="noopener noreferrer">{link}</a>
-              </li>
-            ))}
+            {links.length > 0 ? (
+              links.map((link, index) => (
+                <li key={index}>
+                  <a href={link} target="_blank" rel="noopener noreferrer">{link}</a>
+                </li>
+              ))
+            ) : (
+              <li>Aucun lien disponible</li>
+            )}
           </ul>
         </div>
       )}
