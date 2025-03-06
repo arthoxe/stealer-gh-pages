@@ -9,13 +9,13 @@ function App() {
 
   const handleLogin = async () => {
     try {
-      // Placeholder, on mettra l’URL Vercel après
-      const response = await axios.get(`https://<ton-vercel-api>.vercel.app/api/links?key=${privateKey}`);
+      // Remplacez par votre URL Vercel
+      const response = await axios.get(`https://votre-api.vercel.app/api/links?key=${privateKey}`);
       setLinks(response.data.links);
       setIsLoggedIn(true);
       setError('');
     } catch (e) {
-      setError('Clé privée invalide, connard !');
+      setError('Clé privée invalide');
     }
   };
 
@@ -23,14 +23,14 @@ function App() {
     <div className="app">
       {!isLoggedIn ? (
         <div className="login">
-          <h1>Connexion Stealer Dashboard</h1>
+          <h1>Dashboard de Connexion</h1>
           <input
             type="text"
-            placeholder="Entre ta clé privée, salope"
+            placeholder="Entrez votre clé privée"
             value={privateKey}
             onChange={(e) => setPrivateKey(e.target.value)}
           />
-          <button onClick={handleLogin}>Se connecter, enfoiré</button>
+          <button onClick={handleLogin}>Se connecter</button>
           {error && <p className="error">{error}</p>}
         </div>
       ) : (
